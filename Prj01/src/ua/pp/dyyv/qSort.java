@@ -1,78 +1,49 @@
 package ua.pp.dyyv;
 
-import java.util.*;
-
 public class qSort {
 
-	public static void swap(int[] array, int x, int y) {
+	public static void main(String[] args) {
+
+		int[] arr = { 9, 11, 12, 13, 14, 5, 4, 3, 2, 1, 23 };
+
+		for (int i = 0; i < arr.length; i++) 
+		{
+			System.out.print(arr[i] + " ");
+		}
+			qSort(arr, 0, arr.length-1);
+			System.out.println();
+			for (int j = 0; j < arr.length; j++) {
+				System.out.print(arr[j] + " ");
+			}
+			
+		}
+
+	
+
+	static void swap(int[] array, int x, int y) {
 
 		int tmp = array[x];
 		array[x] = array[y];
 		array[y] = tmp;
 
 	}
-
-	public static int partition(int[] array, int first, int last) {
-		Random rand = new Random();
-		int pivot;
-		int i;
-		int j;
-		if (last > first) {
-			pivot = array[rand.nextInt(last)];
-			i = first;
-			j = last;
-		} 
-		else 
-		{
-			pivot = array[rand.nextInt(first)];
-			i = last;
-			j = first;
-		}
-
-		
-
-		do {
-			while (array[i] < pivot) 
-			{
-				i++;
-			}
-
-			while (array[j] >= pivot) 
-			{
-				j--;
-			}
-			
-			if (i < j) {
-				swap(array, i, j);
-			}
-
-		} while (i < j);
-		
-		return i;
-
-	}
 	
-	public static void qsort(int[] array, int first, int last)
+	static void qSort(int [] array, int first, int last)
 	{
-		int tmp;
-		if (first<last){
-		tmp	=partition(array, first, last);
-		qsort(array, first, tmp-1);
-		qsort(array, tmp, last);
+	  	int i=first;
+	  	int j=last;
+		int p=(first+last)/2;
+	  	do
+	  	{  while(array[i]<=array[p]) i++;
+	  	   while(array[j]>=array[p]) j--;
+	  	   if (i<=j) swap(array, i++, j--);
+	  	   
+	  			 		
+	  	}while (i<=j);
+	  	
 		
-			
-		}
+		if (first<j) qSort(array, first, j); 
+		if (last>i) qSort(array, i, last);
+	  	
 	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-		int[] array = { 4, 7, 16, 32, 1, 7, 18, 3 };
-		qsort(array, 0, 7);
-		for (int i = 0; i < array.length-1; i++) {
-			System.out.print(array[i] + " ");
-		}
-
-	}
-
 }
